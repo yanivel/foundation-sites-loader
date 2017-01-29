@@ -30,8 +30,9 @@ module.exports.pitch = function(remainingRequest) {
 
   styleLoaderCommand = 'require(' + JSON.stringify('-!' + styleLoader + '!' +
       require.resolve('./foundation-sites-styles.loader.js') + '!' + configFilePath) + ');';
-  jsLoaderCommand = 'require(' + JSON.stringify('-!' +
-      require.resolve('./foundation-sites-scripts.loader.js') + '!' + configFilePath) + ');';
-  result = [styleLoaderCommand, jsLoaderCommand].join('\n');
-  return result;
+  // jsLoaderCommand = 'require(' + JSON.stringify('-!' +
+  //    require.resolve('./foundation-sites-scripts.loader.js') + '!' + configFilePath) + ');';
+  // result = [styleLoaderCommand, jsLoaderCommand].join('\n');
+  // return result;
+  return styleLoaderCommand;
 };
