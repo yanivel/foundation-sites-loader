@@ -26,6 +26,16 @@ module.exports.pitch = function(remainingRequest) {
 
   config = require(configFilePath);
   styleLoader = config.styleLoader || 'style-loader!css-loader!sass-loader';
+  
+  if (Array.isArray(styleLoader)) {
+    styleLoader = styleLoader.map(function(loader) {
+      if(isString(loader)) return loader;
+      if(!loader.query) return loader.loader;
+      var query = isString(loader.query) ? loader.query : JSON.stringify(loader.query);
+      return loader.loader + "?" + query;
+    }).join('!');
+  }
+  
   logger.verbose(config, 'styleLoader: %s', styleLoader);
 
   styleLoaderCommand = 'require(' + JSON.stringify('-!' + styleLoader + '!' +
