@@ -1,5 +1,9 @@
 var logger = require('./logger');
 
+function isString(s) { 
+  return (typeof s === 'string') || s instanceof String; 
+};
+
 module.exports = function() {
 };
 
