@@ -33,9 +33,17 @@ module.exports.pitch = function(remainingRequest) {
   
   if (Array.isArray(styleLoader)) {
     styleLoader = styleLoader.map(function(loader) {
-      if(isString(loader)) return loader;
-      if(!loader.query) return loader.loader;
-      var query = isString(loader.query) ? loader.query : JSON.stringify(loader.query);
+      if (isString(loader)) {
+        return loader;
+      }
+      
+      var options = loader.options || loader.query;
+      
+      if (!options) {
+        return loader.loader;
+      }
+      
+      var query = isString(options) ? options : JSON.stringify(options);
       return loader.loader + "?" + query;
     }).join('!');
   }
